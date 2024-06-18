@@ -8,6 +8,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,11 @@ export default function RootLayout({
         <body className={inter.className}>
           <nav className="flex justify-between bg-slate-400 pt-2">
             <div>logo</div>
-            <div>ComboV5</div>
+            <div>
+              <Link href={"/"}>
+              ComboV5
+              </Link>
+              </div>
             <div>
             <SignedOut>
               <SignInButton />
