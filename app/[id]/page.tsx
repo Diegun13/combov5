@@ -1,10 +1,10 @@
 import AddComboBtn from "@/components/AddComboBtn";
+import ComboCard from "@/components/myUI/ComboCard";
 import { db } from "@/db/index";
 import { characters, combos } from "@/db/schema";
+import { SignedIn } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
-import { redirect } from "next/dist/server/api-utils";
 import { headers } from "next/headers";
-
 type comboSet = {
   id: number;
   characterId: number;
@@ -16,7 +16,7 @@ type comboSet = {
   startingPercent: number;
 };
 
-export default async function page({ params }: { params: { id: string } }) {
+export default async function CharacterCombos({ params }: { params: { id: string } }) {
   const char = await db.select().from(characters);
   let charToId = new Map();
   for (let person of char) {
@@ -30,13 +30,24 @@ export default async function page({ params }: { params: { id: string } }) {
     .from(combos)
     .where(eq(combos.characterId, charToId.get(params.id)));
   headers();
+  let displayCombos = charCombos.map((item: comboSet) => (
+    <ComboCard key={item.id} combo={item} />
+    
+  ))
+
   return (
-    <section className="flex flex-col justify-center items-center">
+    <section className="flex flex-col items-center bg-slate-700 h-screen">
       <div className="bg-green-300">{params.id}</div>
-      <div>{charCombos.map((item: comboSet) => item.moves)}</div>
-      <div>
-        add a combo
-        <AddComboBtn id={params.id} />
+      <div className="flex gap-3">{displayCombos}
+      
+      
+
+      {/* <SignedIn> */}
+        <div>
+          add a combo
+          <AddComboBtn id={params.id} />
+        </div>
+      {/* </SignedIn> */}
       </div>
     </section>
   );
