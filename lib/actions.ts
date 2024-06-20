@@ -23,25 +23,5 @@ import { z } from "zod";
       doesKill:  formdata.get("doesKill") == "true"?  true: false,
       startingPercent:  Number(formdata.get("startingPercent")),
     });    
+    console.log(formdata, id, "did it work?") 
   }
-
-
-  export async function onSubmitDog(values: z.infer<typeof ComboValadtion>) {
-    console.log(values)
-    const char = await db.select().from(characters);
-    let charToId = new Map();
-    for (let person of char) {
-      if (!charToId.get(person.name)) {
-        charToId.set(person.name, person.id);
-      }
-    }
-    await db.insert(combos).values({
-      characterId: 1,
-      moves: values.moves as string,
-      file: values.file as string,
-      isTrue: values.isTrue  as boolean,
-      notes: values.notes  as string,
-      doesKill:  values.doesKill as boolean,
-      startingPercent: Number(values.startingPercent),})
-      console.log(values)
-    };

@@ -26,7 +26,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <nav className="flex justify-between bg-slate-400 pt-2">
+          <nav className=" absolute w-screen flex justify-between bg-slate-400 pt-2">
             <div>logo</div>
             <div>
               <Link href={"/"}>

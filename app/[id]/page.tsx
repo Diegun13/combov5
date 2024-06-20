@@ -36,7 +36,7 @@ export default async function CharacterCombos({ params }: { params: { id: string
   ))
 
   return (
-    <section className="flex flex-col items-center bg-slate-700 h-screen">
+    <section className="flex flex-col items-center bg-slate-700 h-screen pt-9">
       <div className="bg-green-300">{params.id}</div>
       <div className="flex gap-3">{displayCombos}
       
