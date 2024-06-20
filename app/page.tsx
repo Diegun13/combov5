@@ -9,7 +9,7 @@ export default async function Home() {
     <CharacterCard key={char.id} char={char}/>
   ))
   return (
-    <main className="flex flex-col items-center bg-slate-700 h-screen">
+    <main className="flex flex-col items-center bg-slate-700 h-screen pt-9">
       <h1 className=" bg-green-900">Select Your Character</h1>
       <div className="flex gap-4 ">
         {displayCharacters}

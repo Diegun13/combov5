@@ -17,49 +17,29 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod";
 import { db } from "@/db/index";
 import { characters, combos } from "@/db/schema";
+import { SubmitCombo } from "@/lib/actions";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function AddCombos({ params }: { params: { id: string } }) {
-    
-  const form = useForm({
+const form = useForm<z.infer<typeof ComboValadtion>>(
+  {
     resolver: zodResolver(ComboValadtion),
     defaultValues: {
       moves: "",
       file: "",
-      isTrue: false,
       notes: "",
+      isTrue: false,
       doesKill: false,
-      startingPercent: 0,
+      startingPercent: 0
     }
-  })
-
-  async function onSubmit(values: z.infer<typeof ComboValadtion>) {
-    console.log(values)
-    const char = await db.select().from(characters);
-    let charToId = new Map();
-    for (let person of char) {
-      if (!charToId.get(person.name)) {
-        charToId.set(person.name, person.id);
-      }
-    }
-    await db.insert(combos).values({
-      characterId: Number(charToId.get(params.id)),
-      moves: values.moves as string,
-      file: values.file as string,
-      isTrue: values.isTrue  as boolean,
-      notes: values.notes  as string,
-      doesKill:  values.doesKill as boolean,
-      startingPercent: Number(values.startingPercent)
-    })
-      console.log(values)
-    }; 
-
-
-  return (
-    <section className="flex flex-col items-center bg-slate-700 h-screen">
-      <div>{params.id} add Page</div>
-      <div className="flex flex-col items-center  h-full justify-center">
-      <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col bg-slate-400  rounded px-4 py-4">
+  }
+)
+return(
+<section className="flex flex-col bg-slate-800  items-center h-screen w-full pt-9">
+      <div >
+      <Form {...form} >
+      <form action={(e)=> SubmitCombo(e, params.id)} 
+      className="space-y-8 flex flex-col bg-slate-400  rounded px-4 py-4">
         <FormField
           control={form.control}
           name="moves"
@@ -94,7 +74,8 @@ export default function AddCombos({ params }: { params: { id: string } }) {
             <FormItem>
               <FormLabel>isTrue</FormLabel>
               <FormControl>
-                <Input type="checkbox" {...field} />
+              <Checkbox checked={field.value} onCheckedChange={field.onChange}/>
+
               </FormControl>
             </FormItem>
             
@@ -107,12 +88,13 @@ export default function AddCombos({ params }: { params: { id: string } }) {
             <FormItem>
               <FormLabel>doesKill</FormLabel>
               <FormControl>
-                <Input type="checkbox" {...field} />
+              <Checkbox type="button" checked={field.value} onCheckedChange={field.onChange}/>
               </FormControl>
             </FormItem>
             
           )}
         />
+        
         </div>
         <FormField
           control={form.control}
@@ -121,7 +103,7 @@ export default function AddCombos({ params }: { params: { id: string } }) {
             <FormItem>
               <FormLabel>notes</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="" {...field} />
+                <Input  type="text" placeholder="" {...field} />
               </FormControl>
             </FormItem>
             
@@ -133,8 +115,8 @@ export default function AddCombos({ params }: { params: { id: string } }) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>startingPercent</FormLabel>
-              <FormControl>
-                <Input type="number"  {...field} />
+              <FormControl >
+                <Input type="number" {...field} />
               </FormControl>
               <FormMessage></FormMessage>
             </FormItem>
@@ -142,30 +124,10 @@ export default function AddCombos({ params }: { params: { id: string } }) {
           )}
         />
         <Button className="text-gray-300" variant="outline"  type="submit">Submit</Button>
-        <Button onClick={()=> console.log()}>Test</Button>
       </form>
     </Form>
-      </div>
-    </section>
-  );
+    </div>
+
+</section>
+)
 }
-
-
-
-
-{/* <SignedOut>
-        your not logged in
-      </SignedOut>
-      <SignedIn>
-      <div>
-        <form action={(e)=> SubmitCombo(e, params.id)}>
-          <input type="text" name="moves" placeholder="moves" />
-          <input type="text" name="file" placeholder="file" />
-          <input type="checkbox" name="isTrue" placeholder="isTrue" />
-          <input type="text" name="notes" placeholder="notes" />
-          <input type="checkbox" name="doesKill" placeholder="doesKill" />
-          <input type="number" name="statingPercent" placeholder="statingPercent" />
-        <button type="submit">Submit</button>
-        </form>
-      </div>
-      </SignedIn> */}
