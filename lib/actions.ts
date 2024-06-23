@@ -23,5 +23,5 @@ import { z } from "zod";
       doesKill:  formdata.get("doesKill") == "true"?  true: false,
       startingPercent:  Number(formdata.get("startingPercent")),
     });    
-    console.log(formdata, id, "did it work?") 
+    // console.log(formdata, id, "did it work?") 
   }

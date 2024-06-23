@@ -12,11 +12,18 @@ type comboSet = {
 
 export default function ComboCard({combo}: {combo: comboSet}) {
   return (
-    <div className="flex flex-col items-center bg-rose-400 rounded-md">
-        <div>{combo.moves}</div>
-        <div>{combo.startingPercent}</div>
-        <div>{combo.file}</div>
-        <div>{combo.notes}</div>
+    <div className="flex flex-col h-25 w-80 my-5 text-center items-center bg-rose-400 rounded-md">
+        <div>Moves: {combo.moves}</div>
+        <div>Is True: {combo.isTrue}</div>
+        <div>Percent:: {combo.startingPercent}</div>
+        <div><video
+      className="h-56 w-96"
+        loop
+        autoPlay
+        muted
+        src={combo.file}
+      /></div>
+        <div>Notes: {combo.notes}</div>
 
     </div>
   )
