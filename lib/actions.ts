@@ -4,9 +4,8 @@ import { characters, combos } from "@/db/schema";
 import { useRouter } from "next/router";
 import { ComboValadtion } from "../lib/validations/ComboVal";
 import { z } from "zod";
-
+import { utapi } from "@/utils/uploadthing";
  export async function SubmitCombo(formdata: FormData, id: string) {
-    "use server"
     const char = await db.select().from(characters);
     let charToId = new Map();
     for (let person of char) {
@@ -14,6 +13,11 @@ import { z } from "zod";
         charToId.set(person.name, person.id);
       }
     }
+   console.log(formdata, "formdata")
+
+    const files = formdata.getAll("file") as File[];
+    const response = await utapi.uploadFiles(new File([files[0]], files[0].name ));
+    formdata.set("file", `${response.data?.url}`);
     await db.insert(combos).values({
       characterId: Number(charToId.get(id)),
       moves: formdata.get("moves") as string,
@@ -25,3 +29,6 @@ import { z } from "zod";
     });    
     // console.log(formdata, id, "did it work?") 
   }
+
+
+

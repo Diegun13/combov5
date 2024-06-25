@@ -1,11 +1,8 @@
 "use client";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ComboValadtion } from "@/lib/validations/ComboVal";
 import { Button } from "@/components/ui/button";
-import "@uploadthing/react/styles.css";
-
 import {
   Form,
   FormControl,
@@ -17,15 +14,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
-import { db } from "@/db/index";
-import { characters, combos } from "@/db/schema";
 import { SubmitCombo } from "@/lib/actions";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/router";
 import { useFormStatus } from "react-dom";
 import { UploadButton } from "@/utils/uploadthing";
+import "@uploadthing/react/styles.css";
+import { useState } from "react";
 
 export default function AddCombos({ params }: { params: { id: string } }) {
+  let [dashSpace, setDashSpace] = useState("")
   let { pending } = useFormStatus();
   const form = useForm<z.infer<typeof ComboValadtion>>({
     resolver: zodResolver(ComboValadtion),
@@ -56,26 +53,41 @@ export default function AddCombos({ params }: { params: { id: string } }) {
                 <FormItem>
                   <FormLabel>Moves</FormLabel>
                   <FormControl>
-                    <Input placeholder="Move List" {...field} />
+                    {/* <input type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="YOUR_WARNING_TEXT" />  */}
+                    
+                    {/* <Input placeholder="Move List" {...field} /> */}
+                    {/* genrated by copiolt kinda */}
+                    <Input
+                    {...field}
+                              onChange={(e) => {
+                                const value = e.target.value.replace(/\s+/g, "-");
+                                setDashSpace(value);
+                                field.value = value;
+                              }}
+                              placeholder="Move List"
+                              value={dashSpace}
+                            />
                   </FormControl>
                 </FormItem>
               )}
             />
-            <UploadButton
-          endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
-            // gen by copilot
-            form.setValue("file", res[0].url);
-          }} 
-        />
+
+            {/* upload */}
+            {/* <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                // gen by copilot
+                form.setValue("file", res[0].url);
+              }}
+            /> */}
             <FormField
               control={form.control}
               name="file"
               render={({ field }) => (
-                <FormItem className="hidden">
+                <FormItem>
                   <FormLabel>file</FormLabel>
                   <FormControl>
-                    <Input className="hidden" placeholder="file" {...field} />
+                    <Input type="file" placeholder="file" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -148,7 +160,6 @@ export default function AddCombos({ params }: { params: { id: string } }) {
             </Button>
           </form>
         </Form>
-       
       </div>
     </section>
   );

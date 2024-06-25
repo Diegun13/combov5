@@ -90,7 +90,7 @@ export default function CharComboPage({ combos, charImg }: { combos: Array<combo
   });
 
   return (
-    <section className=" flex h-screen bg-blue-300">
+    <section className=" flex h-screen bg-blue-300 w-screen">
       <div className="w-36 bg-red-700">
         <Image 
         className="pb-3"
@@ -164,7 +164,7 @@ export default function CharComboPage({ combos, charImg }: { combos: Array<combo
       </div>
 
       <div className=" overflow-scroll mx-auto">
-        <div className="flex flex-wrap gap-2 ">
+        <div className="flex flex-wrap gap-2 w-screen">
           {displayCombos.length === 0 ? <h1>No Combos Found</h1> : listofCombos}
         </div>
       </div>
