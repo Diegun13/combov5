@@ -16,17 +16,17 @@ import { utapi } from "@/utils/uploadthing";
    console.log(formdata, "formdata")
 
     const files = formdata.getAll("file") as File[];
-    const response = await utapi.uploadFiles(new File([files[0]], files[0].name ));
-    formdata.set("file", `${response.data?.url}`);
-    await db.insert(combos).values({
-      characterId: Number(charToId.get(id)),
-      moves: formdata.get("moves") as string,
-      file: formdata.get("file") as string,
-      isTrue:  formdata.get("isTrue") == "true"?  true: false,
-      notes:  formdata.get("notes") as string,
-      doesKill:  formdata.get("doesKill") == "true"?  true: false,
-      startingPercent:  Number(formdata.get("startingPercent")),
-    });    
+    // const response = await utapi.uploadFiles(new File([files[0]], files[0].name ));
+    // formdata.set("file", `${response.data?.url}`);
+    // await db.insert(combos).values({
+    //   characterId: Number(charToId.get(id)),
+    //   moves: formdata.get("moves") as string,
+    //   file: formdata.get("file") as string,
+    //   isTrue:  formdata.get("isTrue") == "true"?  true: false,
+    //   notes:  formdata.get("notes") as string,
+    //   doesKill:  formdata.get("doesKill") == "true"?  true: false,
+    //   startingPercent:  Number(formdata.get("startingPercent")),
+    // });    
     // console.log(formdata, id, "did it work?") 
   }
 
