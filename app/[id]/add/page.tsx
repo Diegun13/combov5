@@ -100,11 +100,13 @@ export default function AddCombos({ params }: { params: { id: string } }) {
                   <FormItem>
                     <FormLabel>isTrue</FormLabel>
                     <FormControl>
-                      {/* <Checkbox
+                      <Checkbox
+                      {...field}
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                      /> */}
-                      <Input {...field}  type="checkbox"  />
+                        value={field.value ? "true" : "false"}
+                      />
+                      {/* <Input {...field}   type="checkbox" value={"true"}  /> */}
                     </FormControl>
                   </FormItem>
                 )}
@@ -116,11 +118,16 @@ export default function AddCombos({ params }: { params: { id: string } }) {
                   <FormItem>
                     <FormLabel>doesKill</FormLabel>
                     <FormControl>
-                      <Checkbox
+                    <Checkbox
                       {...field}
                         checked={field.value}
                         onCheckedChange={field.onChange}
+                        value={field.value ? "true" : "false"}
                       />
+                      {/* <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      /> */}
                     </FormControl>
                   </FormItem>
                 )}
