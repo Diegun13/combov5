@@ -9,9 +9,9 @@ export default async function Home() {
     <CharacterCard key={char.id} char={char} />
   ));
   return (
-    <main className="flex flex-col items-center bg-slate-700 h-screen pt-9">
-      <h1 className=" bg-green-900">Select Your Character</h1>
-      <div className="flex gap-4">
+    <main className="flex flex-col items-center bg-UFD-bg h-screen pt-16">
+      <h1 className="text-white text-2xl font-poppins font-bold pt-2">Select Your Character</h1>
+      <div className=" pt-5 flex h-full w-full justify-center gap-4">
         {displayCharacters}
         </div>
     </main>

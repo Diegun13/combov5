@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import ComboCard from "./ComboCard";
+import { SignedIn } from "@clerk/nextjs";
+import AddComboBtn from "../AddComboBtn";
 type comboSet = {
   id: number;
   characterId: number;
@@ -12,7 +14,15 @@ type comboSet = {
   doesKill: boolean | null;
   startingPercent: number;
 };
-export default function CharComboPage({ combos, charImg }: { combos: Array<comboSet>, charImg: string}) {
+export default function CharComboPage({
+  combos,
+  charImg,
+  id,
+}: {
+  combos: Array<comboSet>;
+  charImg: string;
+  id: string;
+}) {
   const [filterMove, SetFilterMove] = useState("all");
   const [filterPercent, SetFilterPercent] = useState("all");
 
@@ -90,14 +100,14 @@ export default function CharComboPage({ combos, charImg }: { combos: Array<combo
   });
 
   return (
-    <section className=" flex h-screen bg-blue-300 w-screen">
-      <div className="w-36 bg-red-700">
-        <Image 
-        className="pb-3"
-        src={charImg}
-        width={144}
-        height={144}
-        alt="Character Image"
+    <section className="flex h-full w-full">
+      <nav className="w-36 bg-UFD-Char-bg text-center">
+        <Image
+          className="pb-3"
+          src={charImg}
+          width={144}
+          height={144}
+          alt="Character Image"
         />
         <form className="flex flex-col flex-wrap">
           <label htmlFor="statingMove">Starting Move</label>
@@ -129,23 +139,22 @@ export default function CharComboPage({ combos, charImg }: { combos: Array<combo
               </option>
             ))}
           </select>
-          <div className="flex gap-3 justify-center">
-            <label htmlFor="isTrue">True
+          <div className="flex gap-2 justify-center">
+            <label htmlFor="isTrue">True</label>
             <input
               type="checkbox"
               id="isTrue"
               checked={isTrue}
               onChange={handleTrueCheckbox}
             />
-            </label>
-            <label htmlFor="Kills">Kills
+
+            <label htmlFor="Kills">Kills</label>
             <input
               type="checkbox"
               id="Kills"
               checked={doesKill}
               onChange={handleKillCheckbox}
             />
-            </label>
           </div>
 
           <button
@@ -161,10 +170,16 @@ export default function CharComboPage({ combos, charImg }: { combos: Array<combo
             Reset
           </button>
         </form>
-      </div>
+        <div className="flex flex-col item-center mt-[329px]">
+          <SignedIn>
+            
+            <AddComboBtn id={id} />
+          </SignedIn>
+        </div>
+      </nav>
 
-      <div className=" overflow-scroll mx-auto">
-        <div className="flex flex-wrap gap-2 w-screen">
+      <div className=" overflow-y-scroll mx-auto w-full ">
+        <div className="flex flex-wrap  gap-2 justify-center ">
           {displayCombos.length === 0 ? <h1>No Combos Found</h1> : listofCombos}
         </div>
       </div>

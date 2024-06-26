@@ -12,7 +12,7 @@ type comboSet = {
 
 export default function ComboCard({combo}: {combo: comboSet}) {
   return (
-    <div className="flex flex-col h-25 w-80 my-5 text-center items-center bg-rose-400 rounded-md">
+    <div className="flex flex-col h-25 w-80 my-5 text-center items-center overflow-hidden bg-UFD-Char-bg rounded-md border">
         <div>Moves: {combo.moves}</div>
         <div>Is True: {combo.isTrue}</div>
         <div>Percent:: {combo.startingPercent}</div>

@@ -32,6 +32,18 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      colors: {
+        "UFD-nameplate": "#ffc640",
+        "UFD-bg": "#151515",
+        "UFD-Combo-bg": "#222",
+        "UFD-Char-bg": "#333"
+      },
+      fontFamily: {
+        poppins: ["Poppins" , "sans-serif"],
+      },
+      dropShadow: {
+        xl: "1px 1px 6px #111",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

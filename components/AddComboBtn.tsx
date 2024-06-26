@@ -7,7 +7,7 @@ export default function AddComboBtn({ id }: { id: string }) {
  let router = useRouter()
   return (
     <section>
-        <Button variant="default"  onClick={()=> router.push(`/${id}/add`) }> Add Somthing </Button>
+        <Button variant="default"  onClick={()=> router.push(`/${id}/add`) }> Add a combo </Button>
     </section>
   );
 }

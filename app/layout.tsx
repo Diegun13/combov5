@@ -26,20 +26,22 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <nav className=" absolute w-screen flex justify-between bg-slate-400 pt-2">
+          <nav className="absolute flex w-full justify-between bg-UFD-nameplate py-3  border-b-4 border-b-orange-400  ">
             <div>logo</div>
             <div>
               <Link href={"/"}>
-              ComboV5
+                <h1 className=" text-3xl font-poppins font-bold text-UFD-Combo-bg hover:underline hover:text-neutral-700">
+                  ComboV5
+                </h1>
               </Link>
-              </div>
+            </div>
             <div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
           </nav>
           {children}

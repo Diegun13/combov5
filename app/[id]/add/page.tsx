@@ -37,7 +37,7 @@ export default function AddCombos({ params }: { params: { id: string } }) {
   });
 
   return (
-    <section className="flex flex-col bg-slate-800  items-center h-screen w-full pt-9">
+    <section className="flex flex-col bg-slate-800  items-center h-screen w-full pt-20">
       <div>
         <Form {...form}>
           <form

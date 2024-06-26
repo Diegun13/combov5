@@ -37,20 +37,20 @@ export default async function CharacterCombos({ params }: { params: { id: string
   ))
   
   return (
-    <section className="flex flex-col items-center bg-slate-700 h-screen pt-9">
-      <div className="flex gap-2 w-screen justify-evenly">
-        <p className="bg-green-300">
+    <section className="flex flex-col items-center bg-UFD-Combo-bg text-white pt-16 h-screen">
+      {/* <div className="flex gap-2 w-full bg-blue-300 ">
+        <p>
           {params.id}
         </p> 
-        {/* <SignedIn> */}
-        <div>
+        <SignedIn>
+        <div className="flex bg-slate-400">
           add a combo
           <AddComboBtn id={params.id} />
         </div>
-        {/* </SignedIn> */}
-      </div>
-      <div className="flex gap-3 flex-wrap w-screen overflow-scroll">
-      <CharComboPage combos={charCombos} charImg={char[Number(charToId.get(params.id) - 1)].img} />
+        </SignedIn>
+      </div> */}
+      <div className="flex gap-3 flex-wrap w-full h-full overflow-hidden ">
+      <CharComboPage id={params.id} combos={charCombos} charImg={char[Number(charToId.get(params.id) - 1)].img} />
         {/* {displayCombos} */}
       </div>
     </section>
