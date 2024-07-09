@@ -4,6 +4,7 @@ import Image from "next/image";
 import ComboCard from "./ComboCard";
 import { SignedIn } from "@clerk/nextjs";
 import AddComboBtn from "../AddComboBtn";
+import Link from "next/link";
 type comboSet = {
   id: number;
   characterId: number;
@@ -96,7 +97,11 @@ export default function CharComboPage({
   }
 
   let listofCombos = displayCombos.map((combo) => {
-    return <ComboCard key={combo.id} combo={combo} />;
+    return (
+      <Link key={combo.id} href={`/${id}/combos/${combo.id}`} >
+        <ComboCard key={combo.id} combo={combo} />
+      </Link>
+  )
   });
 
   return (
