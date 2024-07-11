@@ -27,7 +27,7 @@ export default async function RootLayout({
   modal
 }: Readonly<{
   children: React.ReactNode;
-  modal?: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
 
   // console.log(user, "user")
