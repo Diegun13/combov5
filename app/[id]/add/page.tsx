@@ -20,6 +20,7 @@ import { useFormStatus } from "react-dom";
 import { UploadButton } from "@/utils/uploadthing";
 import "@uploadthing/react/styles.css";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AddCombos({ params }: { params: { id: string } }) {
   let [dashSpace, setDashSpace] = useState("")
@@ -35,7 +36,7 @@ export default function AddCombos({ params }: { params: { id: string } }) {
       startingPercent: 0,
     },
   });
-
+  const router = useRouter();
   return (
     <section className="flex flex-col bg-slate-800  items-center h-screen w-full pt-20">
       <div>
@@ -159,10 +160,12 @@ export default function AddCombos({ params }: { params: { id: string } }) {
               )}
             />
             <Button
+              
               disabled={pending}
               className="text-gray-300"
               variant="outline"
               type="submit"
+              onClick={() => { router.push(`/${params.id}`)}}
             >
               {pending ? "Submitting" : "Submit"}
             </Button>

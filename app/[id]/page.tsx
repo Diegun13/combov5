@@ -25,16 +25,17 @@ export default async function CharacterCombos({ params }: { params: { id: string
       charToId.set(person.name, Number(person.id));
     }
   }
-  console.log(charToId, "CHar");
+  // console.log(charToId, "CHar");
+  // console.log(params.id, "CHar");
   const charCombos = await db
     .select()
     .from(combos)
     .where(eq(combos.characterId, charToId.get(params.id)));
   headers();
-  let displayCombos = charCombos.map((item: comboSet) => (
-    <ComboCard key={item.id} combo={item} />
+  // let displayCombos = charCombos.map((item: comboSet) => (
+  //   <ComboCard key={item.id} combo={item}  />
     
-  ))
+  // ))
   
   return (
     <section className="flex flex-col items-center bg-UFD-Combo-bg text-white pt-16 h-screen">
