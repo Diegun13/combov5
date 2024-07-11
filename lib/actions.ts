@@ -1,10 +1,32 @@
 "use server"
 import { db } from "@/db/index";
-import { characters, combos } from "@/db/schema";
+import { characters, combos, users } from "@/db/schema";
 import { useRouter } from "next/router";
 import { ComboValadtion } from "../lib/validations/ComboVal";
 import { z } from "zod";
 import { utapi } from "@/utils/uploadthing";
+<<<<<<< Updated upstream
+=======
+import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs/server";
+
+type comboSet = {
+  id: number;
+  characterId: number;
+  moves: string;
+  file: string;
+  isTrue: boolean;
+  notes: string;
+  doesKill: boolean | null;
+  startingPercent: number;
+};
+
+export async function getAllCombos(){
+}
+
+
+>>>>>>> Stashed changes
  export async function SubmitCombo(formdata: FormData, id: string) {
     const char = await db.select().from(characters);
     let charToId = new Map();
@@ -18,7 +40,19 @@ import { utapi } from "@/utils/uploadthing";
     const files = formdata.getAll("file") as File[];
     const response = await utapi.uploadFiles(new File([files[0]], files[0].name ));
     formdata.set("file", `${response.data?.url}`);
+<<<<<<< Updated upstream
+=======
+    }else{
+      formdata.set("file", `na`);
+
+    }
+
+    let testman = await currentUser();
+    const doesUserExist = await db.select().from(users).where(eq(users.clerkID, String(testman?.id)));
+
+>>>>>>> Stashed changes
     await db.insert(combos).values({
+      userId: doesUserExist[0].id,
       characterId: Number(charToId.get(id)),
       moves: formdata.get("moves") as string,
       file: formdata.get("file") as string,
