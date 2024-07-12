@@ -4,16 +4,16 @@ import { useRouter } from 'next/navigation'
 import { Combo } from 'next/font/google'
 import ComboCard from './ComboCard'
 
-export default function Modal({ children, }: { children: React.ReactNode}) {
+export default function ProModal({ children, }: { children: React.ReactNode}) {
   const overlay = useRef(null)
   const wrapper = useRef(null)
   const router = useRouter()
 
- 
+
   
 
   const onDismiss = useCallback(() => {
-    router.back()
+    router.refresh()
   }, [router])
 
   const onClick = useCallback(

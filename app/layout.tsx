@@ -33,8 +33,8 @@ export default async function RootLayout({
   // console.log(user, "user")
   let testman = await currentUser();
   const doesUserExist = await db.select().from(users).where(eq(users.clerkID, String(testman?.id)));
-  console.log(doesUserExist, "currentUser")
-  console.log(testman?.id, "testman")
+  // console.log(doesUserExist, "currentUser")
+  // console.log(testman?.id, "testman")
   if(doesUserExist.length === 0 && testman?.id != undefined|| null){
     await db.insert(users).values({
       clerkID: String(testman?.id) || "",
@@ -60,6 +60,9 @@ export default async function RootLayout({
                 <SignInButton />
               </SignedOut>
               <SignedIn >
+                <Link href={"/Profile"}>
+                  Profile
+                  </Link>
                 <UserButton />
               </SignedIn>
             </div>

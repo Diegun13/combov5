@@ -16,7 +16,7 @@ type comboSet = {
   file: string;
   isTrue: boolean;
   notes: string;
-  doesKill: boolean | null;
+  doesKill: boolean;
   startingPercent: number;
 };
 
@@ -69,10 +69,23 @@ export async function deleteCombo(combo: comboSet) {
   revalidatePath(`/${combo.id}`);
 }
 
-export async function editCombo(combo: comboSet) {
-  db.update(combos)
-    .set({
-      //add udated values here
-    })
-    .where(eq(combos.id, 88));
+export async function editCombo(formdata: FormData, comboID: number) {
+//gen by ai partly
+const updatedFields: any = {};
+formdata.forEach((value, key) => {
+  if (value !== "") {
+    updatedFields[key] = value;
+  }
+});
+if(formdata.get("doesKill") == null){
+  updatedFields["doesKill"] = false
+
+}
+if(formdata.get("isTrue") == null){
+  updatedFields["isTrue"] = false
+
+}
+console.log(updatedFields, "updatedFields")
+await db.update(combos).set(updatedFields).where(eq(combos.id, comboID));
+
 }

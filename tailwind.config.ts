@@ -44,6 +44,9 @@ const config = {
       dropShadow: {
         xl: "1px 1px 6px #111",
       },
+      extend: {
+        visibility: ["group-hover"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

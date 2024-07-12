@@ -13,7 +13,7 @@ type comboSet = {
   file: string;
   isTrue: boolean;
   notes: string;
-  doesKill: boolean | null;
+  doesKill: boolean;
   startingPercent: number;
 };
 

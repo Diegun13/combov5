@@ -1,6 +1,5 @@
 "use client"
 import ComboCard from '@/components/myUI/ComboCard';
-import Modal from '@/components/myUI/Modal';
 import { Combo } from 'next/font/google';
 import { useParams } from 'next/navigation'
 import React from 'react'
@@ -12,7 +11,7 @@ type comboSet = {
     file: string;
     isTrue: boolean;
     notes: string;
-    doesKill: boolean | null;
+    doesKill: boolean ;
     startingPercent: number;
   };
 

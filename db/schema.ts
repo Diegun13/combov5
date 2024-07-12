@@ -24,7 +24,7 @@ export const characters = pgTable('SSBU_characters', {
       file: text('gif').notNull(),
       isTrue: boolean('is_true').notNull(), // BOOLEAN in SQL, integer in TypeScript
       notes: text('notes').notNull(),
-      doesKill: boolean('does_kill'), // BOOLEAN in SQL, integer in TypeScript
+      doesKill: boolean('does_kill').notNull(), // BOOLEAN in SQL, integer in TypeScript
       startingPercent: integer('starting_percent').notNull()
   });
   

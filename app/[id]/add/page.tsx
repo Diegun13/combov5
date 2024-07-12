@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 export default function AddCombos({ params }: { params: { id: string } }) {
   let [dashSpace, setDashSpace] = useState("")
   let { pending } = useFormStatus();
+  let [noSub, setNoSub] = useState(false)
   const form = useForm<z.infer<typeof ComboValadtion>>({
     resolver: zodResolver(ComboValadtion),
     defaultValues: {
@@ -161,11 +162,11 @@ export default function AddCombos({ params }: { params: { id: string } }) {
             />
             <Button
               
-              disabled={pending}
               className="text-gray-300"
               variant="outline"
               type="submit"
-              onClick={() => { router.push(`/${params.id}`)}}
+              onClick={() => {router.push(`/${params.id}`)}}
+              disabled={noSub}
             >
               {pending ? "Submitting" : "Submit"}
             </Button>
